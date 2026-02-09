@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ALEENAAAAAAAAAA!!!!! 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+<style>
+  
+body {
+  margin:0;
+  height:100vh;
+  overflow:hidden;
+  font-family: 'Shadows Into Light', cursive;
+  background: linear-gradient(-45deg, #ff4e8a, #ff85a2, #6a5cff, #ff4e8a);
+  background-size: 400% 400%;
+  animation: gradientMove 12s ease infinite;
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+}
+
+@keyframes gradientMove {
+  0% { background-position:0% 50%; }
+  50% { background-position:100% 50%; }
+  100% { background-position:0% 50%; }
+}
+
+/* SCENES */
+.scene {
+  position:absolute;
+  inset:0;
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:24px;
+}
+.scene.active { display:flex; }
+
+h1 { font-size:2rem; margin-bottom:12px; }
+p { font-size:1.1rem; line-height:1.6; opacity:0.95; }
+.tap { margin-top:20px; font-size:0.9rem; opacity:0.7; }
+
+/* BUTTONS */
+button {
+  padding:14px 28px;
+  margin:10px;
+  border-radius:40px;
+  border:none;
+  cursor:pointer;
+  background: rgba(255,255,255,0.2);
+  color:white;
+  backdrop-filter: blur(8px);
+  transition: transform 0.2s, background 0.2s;
+}
+button:hover { transform: scale(1.08); background: rgba(255,255,255,0.35); }
+
+/* SHAKE EFFECT FOR NO BUTTON */
+@keyframes shake {
+  0% { transform: translate(0px, 0px) rotate(0deg); }
+  25% { transform: translate(5px, -3px) rotate(5deg); }
+  50% { transform: translate(-5px, 3px) rotate(-5deg); }
+  75% { transform: translate(4px, -2px) rotate(3deg); }
+  100% { transform: translate(0px, 0px) rotate(0deg); }
+}
+
+/* ENVELOPE CARD */
+.envelope {
+  position: relative;
+  width: 280px;
+  height: 180px;
+  perspective: 1000px;
+  margin-bottom: 20px;
+}
+.envelope .lid {
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  background: white;
+  top:0;
+  left:0;
+  transform-origin: top;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  transition: transform 1s ease-in-out;
+}
+.envelope.open .lid { transform: rotateX(-180deg); }
+
+.card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: white;
+  top:0;
+  left:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  transform: translateY(20px);
+  transition: transform 1s ease-in-out;
+}
+.envelope.open .card { transform: translateY(-60px); }
+
+.card h1 { font-size: 1.5rem; margin-bottom:8px; color:#ff4e8a; }
+.card p { font-size:1rem; color:#ff85a2; text-align:center; }
+
+/* PARTICLES */
+.particle, .sparkle {
+  position:absolute;
+  pointer-events:none;
+  opacity:0.9;
+}
+.particle {
+  animation-name:fallTrail;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+}
+@keyframes fallTrail {
+  0% { transform: translateY(0) rotate(0deg); opacity:0; }
+  10% { opacity:1; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity:0; }
+}
+.sparkle {
+  animation-name: floatSparkle;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  font-size:14px;
+}
+@keyframes floatSparkle {
+  0% { transform: translateY(0) scale(0.6); opacity:0.5; }
+  50% { transform: translateY(-80vh) scale(1); opacity:1; }
+  100% { transform: translateY(-160vh) scale(0.5); opacity:0; }
+}
+
+/* FINAL SCENE GLOW */
+.final h1, .final p { animation: glowText 2s ease-in-out infinite alternate; }
+@keyframes glowText {
+  0% { text-shadow:0 0 8px rgba(255,182,193,0.5);}
+  100% { text-shadow:0 0 24px rgba(255,105,180,0.9);}
+}
+
+/* NEON TAP GLOW */
+.neon-glow {
+  position: fixed;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle,
+    rgba(255,105,180,1) 0%,
+    rgba(186,85,211,0.9) 40%,
+    rgba(255,105,180,0.4) 65%,
+    rgba(255,105,180,0) 75%
+  );
+  box-shadow:
+    0 0 12px rgba(255,105,180,0.9),
+    0 0 26px rgba(186,85,211,0.8),
+    0 0 50px rgba(255,105,180,0.6);
+  transform: scale(0);
+  animation: neonPop 0.9s ease-out forwards;
+  z-index: 9999;
+}
+
+@keyframes neonPop {
+  0% { transform: scale(0); opacity:1; }
+  60% { transform: scale(6); opacity:0.9; }
+  100% { transform: scale(10); opacity:0; }
+}
+
+/* HEARTBEAT YES BUTTON */
+.heartbeat {
+  animation: heartbeat 1.4s ease-in-out infinite;
+  box-shadow:
+    0 0 16px rgba(255,105,180,0.8),
+    0 0 32px rgba(255,105,180,0.6);
+}
+
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  20% { transform: scale(1.12); }
+  40% { transform: scale(1); }
+  60% { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+/* FINGER TRAIL */
+.trail {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: rgba(255,105,180,0.8);
+  box-shadow:
+    0 0 10px rgba(255,105,180,0.9),
+    0 0 20px rgba(186,85,211,0.8);
+  animation: fadeTrail 0.8s linear forwards;
+  z-index: 9998;
+}
+
+@keyframes fadeTrail {
+  from { opacity:1; transform: scale(1); }
+  to { opacity:0; transform: scale(2); }
+}
+
+/* ENVELOPE HEART BURST */
+.heart-burst {
+  position: absolute;
+  font-size: 18px;
+  pointer-events: none;
+  animation: burstHeart 1.5s forwards;
+  color:#ff4e8a;
+  text-shadow: 0 0 8px #ff4e8a, 0 0 16px #ff85a2, 0 0 24px #ff69b4;
+  z-index: 9999;
+}
+
+@keyframes burstHeart {
+  0% { transform: translate(0,0) scale(0.6) rotate(0deg); opacity:1; }
+  50% { transform: translate(var(--dx), var(--dy)) scale(1.2) rotate(180deg); opacity:1; }
+  100% { transform: translate(calc(var(--dx)*2), calc(var(--dy)*2)) scale(0) rotate(360deg); opacity:0; }
+}
+</style>
+</head>
+<body>
+
+ <!-- MUSIC -->
+<audio id="music" loop preload="auto">
+  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+</audio>
+<!-- PARTICLES -->
+<div id="particleContainer"></div>
+
+<!-- SCENE 1 -->
+<div id="scene1" class="scene active" onclick="nextScene(2)">
+  <h1>Hey Aleena 💖</h1>
+  <p>This isn’t just a page, it’s a piece of how I feel about you.
+It took me four days to finish this, not because it was hard, but because I wanted every part of it to mean something. Every little detail is here for one reason — to let you know how much you matter to me.
+
+I put all this effort into it because loving you isn’t something I take lightly. I wanted you to see, even in a small way, how deeply I care and how much my heart is in this.</p>
+  <div class="tap">Tap anywhere ✨</div>
+</div>
+
+<!-- SCENE 2 - Envelope Card with YES/NO -->
+<div id="scene2" class="scene">
+  <div class="envelope" id="envelope">
+    <div class="lid"></div>
+    <div class="card">
+      <h1>Happy Valentine's Day 💖</h1>
+      <p>To my love Aleena,<br>Every day with you is magical ✨</p>
+    </div>
+  </div>
+    <!-- Background Music -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <button id="yesBtn" onclick="choose()">Yes 💕</button>
+  <button id="noBtn" onclick="playfulNo()">No 🙄</button>
+  <p id="noMessage" style="margin-top:16px; font-size:1.1rem; opacity:0;"></p>
+</div>
+
+<!-- SCENE 3 - She said YES -->
+<div id="scene3" class="scene" onclick="nextScene(4)">
+  <div class="big">She said YES 💖</div>
+  <p>You chose us.</p>
+  <div class="tap">Tap anywhere</div>
+</div>
+
+<!-- FINAL SCENE -->
+<div id="scene4" class="scene final">
+  <h1>For You 💌</h1>
+  <p>
+   Happy Valentine’s Day, my love ❤️
+
+I don’t think you realize how much you’ve changed my life just by being in it. The way you smile, the way you understand me without words, the way you make even ordinary moments feel special — all of it means more to me than I can ever explain.
+
+With you, love feels easy and real. You make me feel safe, seen, and cared for in a way I never knew I needed. Every day I find new reasons to be grateful for you, and every day I’m reminded how lucky I am to love someone like you.
+
+No matter where life takes us, I promise to stand by you, to support you, to laugh with you, and to hold your hand through everything — the good days, the hard days, and all the little moments in between.
+
+Today isn’t just about flowers or words. It’s about us. And if I had to choose again and again, I would still choose you, always 💖
+
+Happy Valentine’s Day, my heart 💌
+  </p>
+  <p>Click this and tell how was this VALENTINES DAY gift for !!! :|
+    <a href="https://wa.me/qr/XWST22WF2JELD1" target="_blank">Nsome Here<//
+    a>
+    </p>
+    </footer>
+</div>
+<script>
+const music = document.getElementById("music");
+const container = document.getElementById("particleContainer");
+const emojis = ["💖","💗","💞","✨","💘","💝","💫","💓","💟"];
+const sparkles = ["✨","💫","🌟","⭐"];
+
+// MUSIC FADE-IN
+function fadeInMusic() {
+  music.volume=0;
+  music.play().catch(()=>{});
+  let v=0;
+  const f=setInterval(()=>{ v+=0.02; music.volume=v; if(v>=1) clearInterval(f); },100);
+}
+
+// VIBRATION
+function vibrate(p) { if(navigator.vibrate) navigator.vibrate(p); }
+
+// SCENE NAVIGATION
+function nextScene(n){
+  vibrate(40);
+  document.querySelectorAll('.scene').forEach(s=>s.classList.remove('active'));
+  document.getElementById("scene"+n).classList.add('active');
+  if(n===2) fadeInMusic();
+}
+
+// YES BUTTON
+function choose(){
+  const btn=document.getElementById("yesBtn");
+  btn.classList.add("heartbeat");
+  openEnvelopeHearts();
+  vibrate([80,40,80]);
+  burstParticles();
+  setTimeout(()=>nextScene(3),1400);
+}
+
+// PLAYFUL NO BUTTON
+function playfulNo() {
+  const btn = document.getElementById("noBtn");
+  const msg = document.getElementById("noMessage");
+
+  vibrate([50,30,50]);
+
+  msg.innerText = "Nope… you already chose me 💕";
+  msg.style.opacity = 1;
+
+  btn.style.animation = "shake 0.3s";
+  btn.addEventListener("animationend", () => btn.style.animation="");
+
+  const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+  const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+  btn.style.position = "absolute";
+  btn.style.left = x + "px";
+  btn.style.top = y + "px";
+
+  burstParticles();
+  setTimeout(() => nextScene(3), 1200);
+}
+
+// BURST PARTICLES
+function burstParticles(){
+  for(let i=0;i<30;i++){
+    const e = document.createElement("div");
+    e.className="particle";
+    e.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+    e.style.left = (50 + (Math.random()*40-20)) + "vw";
+    e.style.top = "50vh";
+    e.style.fontSize = (18+Math.random()*20)+"px";
+    e.style.animationDuration = (1.5+Math.random()*1.5)+"s";
+    container.appendChild(e);
+
+    for(let j=0;j<3;j++){
+      const s = document.createElement("div");
+      s.className="sparkle";
+      s.innerText = sparkles[Math.floor(Math.random()*sparkles.length)];
+      s.style.left = e.style.left;
+      s.style.top = "50vh";
+      s.style.fontSize = (6+Math.random()*12)+"px";
+      s.style.animationDuration = (1+j*0.3)+"s";
+      container.appendChild(s);
+      setTimeout(()=>s.remove(),3000);
+    }
+    setTimeout(()=>e.remove(),3000);
+  }
+}
+
+// ENVELOPE HEART BURST
+function openEnvelopeHearts(){
+  const envelope = document.getElementById("envelope");
+  envelope.classList.add("open");
+  const heartCount = 25;
+  for(let i=0;i<heartCount;i++){
+    const h = document.createElement("div");
+    h.className="heart-burst";
+    h.innerText="💖";
+    const dx = (Math.random()-0.5)*200 + "px";
+    const dy = (Math.random()-0.5)*200 + "px";
+    h.style.setProperty('--dx', dx);
+    h.style.setProperty('--dy', dy);
+    h.style.left = "50%";
+    h.style.top = "50%";
+    envelope.appendChild(h);
+    setTimeout(()=>h.remove(),1500);
+  }
+}
+
+// CONTINUOUS FALLING EMOJIS
+setInterval(()=>{
+  const e = document.createElement("div");
+  e.className="particle";
+  e.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+  e.style.left = Math.random()*100 + "vw";
+  e.style.top = "-50px";
+  e.style.fontSize = 14+Math.random()*24+"px";
+  e.style.animationDuration = 5+Math.random()*5+"s";
+  container.appendChild(e);
+  setTimeout(()=>e.remove(),10000);
+},250);
+
+// RANDOM FLOATING SPARKLES
+setInterval(()=>{
+  const s = document.createElement("div");
+  s.className="sparkle";
+  s.innerText = sparkles[Math.floor(Math.random()*sparkles.length)];
+  s.style.left = Math.random()*100 + "vw";
+  s.style.top = "100vh";
+  s.style.fontSize = (6+Math.random()*14)+"px";
+  s.style.animationDuration = (6+Math.random()*6)+"s";
+  container.appendChild(s);
+  setTimeout(()=>s.remove(),12000);
+},200);
+
+/* NEON TAP GLOW */
+document.addEventListener("click", e => {
+  const glow = document.createElement("div");
+  glow.className = "neon-glow";
+  glow.style.left = e.clientX - 9 + "px";
+  glow.style.top = e.clientY - 9 + "px";
+  document.body.appendChild(glow);
+  setTimeout(() => glow.remove(), 900);
+});
+
+/* FINGER / MOUSE NEON TRAIL */
+let lastTrail = 0;
+function trailEffect(x, y) {
+  const now = Date.now();
+  if (now - lastTrail < 25) return;
+  lastTrail = now;
+
+  const t = document.createElement("div");
+  t.className = "trail";
+  t.style.left = x - 5 + "px";
+  t.style.top = y - 5 + "px";
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 800);
+}
+
+document.addEventListener("mousemove", e => {
+  trailEffect(e.clientX, e.clientY);
+});
+
+document.addEventListener("touchmove", e => {
+  const touch = e.touches[0];
+  trailEffect(touch.clientX, touch.clientY);
+});
+</script>
+</body>
+</html>
