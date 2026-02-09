@@ -79,7 +79,26 @@ button:hover { transform: scale(1.08); background: rgba(255,255,255,0.35); }
 .sparkle { animation-name: floatSparkle; animation-timing-function: linear; animation-iteration-count: infinite; font-size:14px; }
 @keyframes floatSparkle { 0% { transform: translateY(0) scale(0.6); opacity:0.5; } 50% { transform: translateY(-80vh) scale(1); opacity:1; } 100% { transform: translateY(-160vh) scale(0.5); opacity:0; } }
 
-/* HEARTS, NEON, TRAILS, ETC. (same as previous) */
+/* PHOTO GALLERY */
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+.gallery img {
+  width: 120px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 2px solid #ff85a2;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.gallery img:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 12px rgba(255, 72, 128, 0.6);
+}
 </style>
 </head>
 <body>
@@ -90,12 +109,18 @@ button:hover { transform: scale(1.08); background: rgba(255,255,255,0.35); }
 
 <div id="particleContainer"></div>
 
+<!-- Scene 1 -->
 <div id="scene1" class="scene active" onclick="nextScene(2)">
   <h1>Hey Aleena 💖</h1>
-  <p>This isn’t just a page, it’s a piece of how I feel about you...</p>
+  <p>This isn’t just a page; it’s a piece of how I feel about you.
+It took me a week to finish this.
+Maybe it looks simple, but I made it with all of my heart.
+I put in all this effort because I love you so much.
+I love you more than anything Maaduuuu🥹💍🤍 ....</p>
   <div class="tap">Tap anywhere ✨</div>
 </div>
 
+<!-- Scene 2 -->
 <div id="scene2" class="scene">
   <div class="envelope" id="envelope">
     <div class="lid"></div>
@@ -110,30 +135,41 @@ button:hover { transform: scale(1.08); background: rgba(255,255,255,0.35); }
   <p id="noMessage" style="margin-top:16px; font-size:1.1rem; opacity:0;"></p>
 </div>
 
+<!-- Scene 3 -->
 <div id="scene3" class="scene" onclick="nextScene(4)">
   <div class="big">She said YES 💖</div>
   <p>You chose us.</p>
   <div class="tap">Tap anywhere</div>
 </div>
 
-<div id="scene4" class="scene final">
+<!-- Scene 4 -->
+<div id="scene4" class="scene final" onclick="nextScene(5)">
   <h1>For You 💌</h1>
-  <p>Happy Valentine’s Day, my love ❤️
-
-I don’t think you realize how much you’ve changed my life just by being in it. The way you smile, the way you understand me without words, the way you make even ordinary moments feel special — all of it means more to me than I can ever explain.
-
+  <p>Happy Valentine’s Day, my love 🥹💍🤍
+I don’t think you realize how much you’ve changed my life just by being in it. The way you smile, the way you understand me without words, the way you make even ordinary moments feel special ,all of it means more to me than I can ever explain.
 With you, love feels easy and real. You make me feel safe, seen, and cared for in a way I never knew I needed. Every day I find new reasons to be grateful for you, and every day I’m reminded how lucky I am to love someone like you.
-
-No matter where life takes us, I promise to stand by you, to support you, to laugh with you, and to hold your hand through everything — the good days, the hard days, and all the little moments in between.
-
-Today isn’t just about flowers or words. It’s about us. And if I had to choose again and again, I would still choose you — always 💖
-
+No matter where life takes us, I promise to stand by you, to support you, to laugh with you, and to hold your hand through everything even in the good days, the hard days, and all the little moments in between.
+Today isn’t just about flowers or words. It’s about us. And if I had to choose again and again, I would still choose you always 🥹🤍
 Happy Valentine’s Day, my heart 💌</p>
-<p>Click this and contact me:|
-    <a href="https://wa.me/qr/XWST22WF2JELD1" target="_blank">Click this and how was this Valentine's Day gift for you !!!<//
-    a>
-    </p>
-    </footer>
+</div>
+
+<!-- Scene 5 - PHOTO GALLERY -->
+<div id="scene5" class="scene">
+  <h1>Our Memories 💖</h1>
+  <p>Some of my favorite moments with you...</p>
+  <div class="gallery">
+    <img src="us9.png.jpeg" alt="Photo 1">
+    <img src="us8.png.jpeg" alt="Photo 2">
+    <img src="us4.png.jpeg" alt="Photo 3">
+    <img src="us5.png.jpeg" alt="Photo 4">
+    <img src="us6.png.jpeg" alt="Photo 5">
+    <img src="us7.png.jpeg" alt="Photo 6">
+    <img src="us10.png.jpeg" alt="Photo 7">
+  </div>
+  <div class="tap">Tap anywhere ✨</div>
+  <p>Will You Be My Valentine Forever Aleena🥹💍🤍? 
+<a href="https://wa.me/qr/XWST22WF2JELD1" target="_blank">Click here tell how was this Valentine's Day gift for youn !!!</a></p>
+</div>
 </div>
 
 <script>
@@ -144,7 +180,12 @@ const sparkles=["✨","💫","🌟","⭐"];
 
 function fadeInMusic(){ music.volume=0; music.play().catch(()=>{}); let v=0; const f=setInterval(()=>{v+=0.02; music.volume=v;if(v>=1)clearInterval(f);},100);}
 function vibrate(p){if(navigator.vibrate)navigator.vibrate(p);}
-function nextScene(n){vibrate(40);document.querySelectorAll('.scene').forEach(s=>s.classList.remove('active'));document.getElementById("scene"+n).classList.add('active');if(n===2)fadeInMusic();}
+function nextScene(n){
+    vibrate(40);
+    document.querySelectorAll('.scene').forEach(s=>s.classList.remove('active'));
+    document.getElementById("scene"+n).classList.add('active');
+    if(n===2) fadeInMusic();
+}
 function choose(){const btn=document.getElementById("yesBtn");btn.classList.add("heartbeat");openEnvelopeHearts();vibrate([80,40,80]);burstParticles();setTimeout(()=>nextScene(3),1400);}
 function playfulNo(){const btn=document.getElementById("noBtn");const msg=document.getElementById("noMessage");vibrate([50,30,50]);msg.innerText="Nope… you already chose me 💕";msg.style.opacity=1;btn.style.animation="shake 0.3s";btn.addEventListener("animationend",()=>btn.style.animation="");const x=Math.random()*(window.innerWidth-btn.offsetWidth);const y=Math.random()*(window.innerHeight-btn.offsetHeight);btn.style.position="absolute";btn.style.left=x+"px";btn.style.top=y+"px";burstParticles();setTimeout(()=>nextScene(3),1200);}
 function burstParticles(){for(let i=0;i<30;i++){const e=document.createElement("div");e.className="particle";e.innerText=emojis[Math.floor(Math.random()*emojis.length)];e.style.left=(50+(Math.random()*40-20))+"vw";e.style.top="50vh";e.style.fontSize=(18+Math.random()*20)+"px";e.style.animationDuration=(1.5+Math.random()*1.5)+"s";container.appendChild(e);for(let j=0;j<3;j++){const s=document.createElement("div");s.className="sparkle";s.innerText=sparkles[Math.floor(Math.random()*sparkles.length)];s.style.left=e.style.left;s.style.top="50vh";s.style.fontSize=(6+Math.random()*12)+"px";s.style.animationDuration=(1+j*0.3)+"s";container.appendChild(s);setTimeout(()=>s.remove(),3000);}setTimeout(()=>e.remove(),3000);}}
